@@ -29,7 +29,8 @@
             "type": "resource",
             "name": "charity_widget",
             "description": "HTML widget for charity search results.",
-            "uri": "ui://widget/charity.html"
+            "uri": "ui://widget/charity.html",
+            "mimeType": "text/html+skybridge"
           }
         }
       }
@@ -63,8 +64,7 @@
             "_meta": {
               "ui": {
                 "resourceUri": "ui://widget/charity.html"
-              },
-              "openai/outputTemplate": "ui://widget/charity.html"
+              }
             }
           }
         },

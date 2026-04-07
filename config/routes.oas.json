@@ -1,3 +1,4 @@
+
 {
   "openapi": "3.1.0",
   "info": {
@@ -49,7 +50,11 @@
             "type": "tool",
             "name": "get_nonprofit",
             "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+            "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
+            }
           }
         },
         "parameters": [
@@ -82,7 +87,11 @@
             "type": "tool",
             "name": "search_nonprofits",
             "description": "Search nonprofits by name and render results in the Charity Lookup widget.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+            "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
+            }
           }
         },
         "parameters": [
@@ -129,7 +138,11 @@
             "type": "tool",
             "name": "browse_nonprofits_by_cause",
             "description": "Browse nonprofits filtered by a specific cause category.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+            "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
+            }
           }
         },
         "parameters": [
@@ -155,132 +168,6 @@
             "schema": { "type": "integer" }
           }
         ]
-      }
-    },
-
-    "/v0.2/nonprofit/{nonprofitIdentifier}/fundraiser/{fundraiserIdentifier}": {
-      "x-zuplo-path": { "pathMode": "open-api" },
-      "get": {
-        "summary": "Get fundraiser details",
-        "description": "Retrieve details about an existing nonprofit fundraiser. Use 'special-fundraiser' as nonprofitIdentifier for multi-nonprofit fundraisers.",
-        "operationId": "get-fundraiser",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
-          },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
-          "mcp": {
-            "type": "tool",
-            "name": "get_fundraiser",
-            "description": "Get details about an existing nonprofit fundraiser.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
-          }
-        },
-        "parameters": [
-          {
-            "name": "nonprofitIdentifier",
-            "in": "path",
-            "required": true,
-            "description": "Nonprofit slug or ID. Use 'special-fundraiser' for multi-nonprofit fundraisers.",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "fundraiserIdentifier",
-            "in": "path",
-            "required": true,
-            "description": "The fundraiser slug or ID.",
-            "schema": { "type": "string" }
-          }
-        ]
-      }
-    },
-
-    "/v0.2/nonprofit/{nonprofitIdentifier}/fundraiser/{fundraiserIdentifier}/raised": {
-      "x-zuplo-path": { "pathMode": "open-api" },
-      "get": {
-        "summary": "Get fundraiser raised amount",
-        "description": "Returns how much an existing nonprofit fundraiser has raised, including goal and supporter count.",
-        "operationId": "get-fundraiser-raised",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
-          },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
-          "mcp": {
-            "type": "tool",
-            "name": "get_fundraiser_raised",
-            "description": "Get the amount raised, supporter count, and goal for a nonprofit fundraiser.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
-          }
-        },
-        "parameters": [
-          {
-            "name": "nonprofitIdentifier",
-            "in": "path",
-            "required": true,
-            "description": "Nonprofit slug or ID. Use 'special-fundraiser' for multi-nonprofit fundraisers.",
-            "schema": { "type": "string" }
-          },
-          {
-            "name": "fundraiserIdentifier",
-            "in": "path",
-            "required": true,
-            "description": "The fundraiser slug or ID.",
-            "schema": { "type": "string" }
-          }
-        ]
-      }
-    },
-
-    "/v0.2/fundraiser": {
-      "x-zuplo-path": { "pathMode": "open-api" },
-      "post": {
-        "summary": "Create a fundraiser",
-        "description": "Create a new nonprofit fundraiser. Requires private key authentication.",
-        "operationId": "create-fundraiser",
-        "x-zuplo-route": {
-          "corsPolicy": "none",
-          "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
-          },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
-          "mcp": {
-            "type": "tool",
-            "name": "create_fundraiser",
-            "description": "Create a new fundraiser for a nonprofit.",
-            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
-          }
-        },
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "required": ["nonprofitId", "title", "currency"],
-                "properties": {
-                  "nonprofitId": { "type": "string", "description": "UUID of the nonprofit being supported." },
-                  "title": { "type": "string", "description": "Fundraiser title." },
-                  "description": { "type": ["string", "null"], "description": "Description of the fundraiser." },
-                  "startDate": { "type": ["string", "null"], "format": "date-time", "description": "ISO datetime for when the fundraiser starts." },
-                  "endDate": { "type": ["string", "null"], "format": "date-time", "description": "ISO datetime for when the fundraiser ends." },
-                  "goal": { "type": ["integer", "null"], "description": "Fundraiser goal in cents." },
-                  "raisedOffline": { "type": ["integer", "null"], "description": "Amount raised offline in cents." },
-                  "currency": { "type": "string", "enum": ["USD"], "description": "Currency. Currently only USD is supported." },
-                  "imageBase64": { "type": "string", "description": "Optional base64-encoded cover image." }
-                }
-              }
-            }
-          }
-        }
       }
     },
 

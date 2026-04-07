@@ -243,18 +243,6 @@
                 {
                   "file": "./config/routes.oas.json",
                   "id": "browse-nonprofits-by-cause"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "get-fundraiser"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "get-fundraiser-raised"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "create-fundraiser"
                 }
               ],
               "debugMode": true

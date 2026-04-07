@@ -1,11 +1,24 @@
+
 {
   "policies": [
     {
       "name": "inject-every-org-api-key",
-      "policyType": "custom-code-inbound",
+      "policyType": "add-query-param-inbound",
       "handler": {
         "export": "default",
-        "module": "$import(./modules/inject-api-key)"
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "name": "apiKey",
+          "value": "$env(EVERY_ORG_API_KEY)"
+        }
+      }
+    },
+    {
+      "name": "set-skybridge-content-type",
+      "policyType": "custom-code-outbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/set-skybridge-content-type)"
       }
     }
   ]

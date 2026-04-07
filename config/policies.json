@@ -3,13 +3,17 @@
   "policies": [
     {
       "name": "inject-every-org-api-key",
-      "policyType": "add-query-param-inbound",
+      "policyType": "set-query-params-inbound",
       "handler": {
-        "export": "default",
+        "export": "SetQueryParamsInboundPolicy",
         "module": "$import(@zuplo/runtime)",
         "options": {
-          "name": "apiKey",
-          "value": "$env(EVERY_ORG_API_KEY)"
+          "params": [
+            {
+              "name": "apiKey",
+              "value": "$env(EVERY_ORG_API_KEY)"
+            }
+          ]
         }
       }
     },

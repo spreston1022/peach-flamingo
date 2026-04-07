@@ -49,11 +49,7 @@
             "type": "tool",
             "name": "get_nonprofit",
             "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID.",
-            "_meta": {
-              "ui": { "resourceUri": "ui://widget/charity.html" },
-              "openai/outputTemplate": "ui://widget/charity.html",
-              "openai/widgetAccessible": true
-            }
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
           }
         },
         "parameters": [
@@ -86,11 +82,7 @@
             "type": "tool",
             "name": "search_nonprofits",
             "description": "Search nonprofits by name and render results in the Charity Lookup widget.",
-            "_meta": {
-              "ui": { "resourceUri": "ui://widget/charity.html" },
-              "openai/outputTemplate": "ui://widget/charity.html",
-              "openai/widgetAccessible": true
-            }
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
           }
         },
         "parameters": [
@@ -137,11 +129,7 @@
             "type": "tool",
             "name": "browse_nonprofits_by_cause",
             "description": "Browse nonprofits filtered by a specific cause category.",
-            "_meta": {
-              "ui": { "resourceUri": "ui://widget/charity.html" },
-              "openai/outputTemplate": "ui://widget/charity.html",
-              "openai/widgetAccessible": true
-            }
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
           }
         },
         "parameters": [

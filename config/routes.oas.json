@@ -25,7 +25,7 @@
             "name": "charity_widget",
             "description": "HTML widget for charity search results.",
             "uri": "ui://widget/charity.html",
-            "mimeType": "text/html+skybridge"
+            "mimeType": "text/html;profile=mcp-app"
           }
         }
       }

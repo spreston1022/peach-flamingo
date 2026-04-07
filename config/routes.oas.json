@@ -5,10 +5,9 @@
     "title": "Every.org Charity API"
   },
   "paths": {
+
     "/": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
+      "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Charity Lookup widget",
         "description": "HTML widget resource for rendering charity search results.",
@@ -18,27 +17,22 @@
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://project-ox76b.vercel.app"
-            }
+            "options": { "baseUrl": "https://project-ox76b.vercel.app" }
           },
-          "policies": {
-            "inbound": []
-          },
+          "policies": { "inbound": [] },
           "mcp": {
             "type": "resource",
             "name": "charity_widget",
             "description": "HTML widget for charity search results.",
             "uri": "ui://widget/charity.html",
-            "mimeType": "text/html+skybridge"
+            "mimeType": "text/html;profile=mcp-app"
           }
         }
       }
     },
+
     "/v0.2/nonprofit/{identifier}": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
+      "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Get nonprofit details",
         "description": "Get data about a nonprofit by slug, EIN, or nonprofit ID.",
@@ -48,23 +42,17 @@
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://partners.every.org"
-            }
+            "options": { "baseUrl": "https://partners.every.org" }
           },
-          "policies": {
-            "inbound": [
-              "inject-every-org-api-key"
-            ]
-          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
           "mcp": {
             "type": "tool",
             "name": "get_nonprofit",
             "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID.",
             "_meta": {
-              "ui": {
-                "resourceUri": "ui://widget/charity.html"
-              }
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
             }
           }
         },
@@ -74,17 +62,14 @@
             "in": "path",
             "required": true,
             "description": "Nonprofit slug, EIN, or nonprofit ID.",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ]
       }
     },
+
     "/v0.2/search/{searchTerm}": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
+      "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Search nonprofits",
         "description": "Search nonprofits by name. Designed for low latency — safe to call on every keystroke.",
@@ -94,23 +79,17 @@
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://partners.every.org"
-            }
+            "options": { "baseUrl": "https://partners.every.org" }
           },
-          "policies": {
-            "inbound": [
-              "inject-every-org-api-key"
-            ]
-          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
           "mcp": {
             "type": "tool",
             "name": "search_nonprofits",
             "description": "Search nonprofits by name and render results in the Charity Lookup widget.",
             "_meta": {
-              "ui": {
-                "resourceUri": "ui://widget/charity.html"
-              }
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
             }
           }
         },
@@ -120,36 +99,28 @@
             "in": "path",
             "required": true,
             "description": "The search term to query nonprofits by name.",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           },
           {
             "name": "take",
             "in": "query",
             "required": false,
             "description": "Number of results to return. Maximum 50.",
-            "schema": {
-              "type": "integer",
-              "maximum": 50
-            }
+            "schema": { "type": "integer", "maximum": 50 }
           },
           {
             "name": "causes",
             "in": "query",
             "required": false,
             "description": "Filter by cause(s). Comma-separated for OR filter, e.g. humans,environment.",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           }
         ]
       }
     },
+
     "/v0.2/browse/{cause}": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
+      "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Browse nonprofits by cause",
         "description": "Returns nonprofits associated with a given cause.",
@@ -159,23 +130,17 @@
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": {
-              "baseUrl": "https://partners.every.org"
-            }
+            "options": { "baseUrl": "https://partners.every.org" }
           },
-          "policies": {
-            "inbound": [
-              "inject-every-org-api-key"
-            ]
-          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
           "mcp": {
             "type": "tool",
             "name": "browse_nonprofits_by_cause",
             "description": "Browse nonprofits filtered by a specific cause category.",
             "_meta": {
-              "ui": {
-                "resourceUri": "ui://widget/charity.html"
-              }
+              "ui": { "resourceUri": "ui://widget/charity.html" },
+              "openai/outputTemplate": "ui://widget/charity.html",
+              "openai/widgetAccessible": true
             }
           }
         },
@@ -185,36 +150,154 @@
             "in": "path",
             "required": true,
             "description": "The cause to browse nonprofits by (e.g. animals, environment, humans).",
-            "schema": {
-              "type": "string"
-            }
+            "schema": { "type": "string" }
           },
           {
             "name": "take",
             "in": "query",
             "required": false,
             "description": "Number of results to return per page. Maximum 100.",
-            "schema": {
-              "type": "integer",
-              "maximum": 100
-            }
+            "schema": { "type": "integer", "maximum": 100 }
           },
           {
             "name": "page",
             "in": "query",
             "required": false,
             "description": "Page number of results to return.",
-            "schema": {
-              "type": "integer"
-            }
+            "schema": { "type": "integer" }
           }
         ]
       }
     },
+
+    "/v0.2/nonprofit/{nonprofitIdentifier}/fundraiser/{fundraiserIdentifier}": {
+      "x-zuplo-path": { "pathMode": "open-api" },
+      "get": {
+        "summary": "Get fundraiser details",
+        "description": "Retrieve details about an existing nonprofit fundraiser. Use 'special-fundraiser' as nonprofitIdentifier for multi-nonprofit fundraisers.",
+        "operationId": "get-fundraiser",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": { "baseUrl": "https://partners.every.org" }
+          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "mcp": {
+            "type": "tool",
+            "name": "get_fundraiser",
+            "description": "Get details about an existing nonprofit fundraiser.",
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nonprofitIdentifier",
+            "in": "path",
+            "required": true,
+            "description": "Nonprofit slug or ID. Use 'special-fundraiser' for multi-nonprofit fundraisers.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fundraiserIdentifier",
+            "in": "path",
+            "required": true,
+            "description": "The fundraiser slug or ID.",
+            "schema": { "type": "string" }
+          }
+        ]
+      }
+    },
+
+    "/v0.2/nonprofit/{nonprofitIdentifier}/fundraiser/{fundraiserIdentifier}/raised": {
+      "x-zuplo-path": { "pathMode": "open-api" },
+      "get": {
+        "summary": "Get fundraiser raised amount",
+        "description": "Returns how much an existing nonprofit fundraiser has raised, including goal and supporter count.",
+        "operationId": "get-fundraiser-raised",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": { "baseUrl": "https://partners.every.org" }
+          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "mcp": {
+            "type": "tool",
+            "name": "get_fundraiser_raised",
+            "description": "Get the amount raised, supporter count, and goal for a nonprofit fundraiser.",
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+          }
+        },
+        "parameters": [
+          {
+            "name": "nonprofitIdentifier",
+            "in": "path",
+            "required": true,
+            "description": "Nonprofit slug or ID. Use 'special-fundraiser' for multi-nonprofit fundraisers.",
+            "schema": { "type": "string" }
+          },
+          {
+            "name": "fundraiserIdentifier",
+            "in": "path",
+            "required": true,
+            "description": "The fundraiser slug or ID.",
+            "schema": { "type": "string" }
+          }
+        ]
+      }
+    },
+
+    "/v0.2/fundraiser": {
+      "x-zuplo-path": { "pathMode": "open-api" },
+      "post": {
+        "summary": "Create a fundraiser",
+        "description": "Create a new nonprofit fundraiser. Requires private key authentication.",
+        "operationId": "create-fundraiser",
+        "x-zuplo-route": {
+          "corsPolicy": "none",
+          "handler": {
+            "export": "urlForwardHandler",
+            "module": "$import(@zuplo/runtime)",
+            "options": { "baseUrl": "https://partners.every.org" }
+          },
+          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "mcp": {
+            "type": "tool",
+            "name": "create_fundraiser",
+            "description": "Create a new fundraiser for a nonprofit.",
+            "_meta": { "ui": { "resourceUri": "ui://widget/charity.html" } }
+          }
+        },
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["nonprofitId", "title", "currency"],
+                "properties": {
+                  "nonprofitId": { "type": "string", "description": "UUID of the nonprofit being supported." },
+                  "title": { "type": "string", "description": "Fundraiser title." },
+                  "description": { "type": ["string", "null"], "description": "Description of the fundraiser." },
+                  "startDate": { "type": ["string", "null"], "format": "date-time", "description": "ISO datetime for when the fundraiser starts." },
+                  "endDate": { "type": ["string", "null"], "format": "date-time", "description": "ISO datetime for when the fundraiser ends." },
+                  "goal": { "type": ["integer", "null"], "description": "Fundraiser goal in cents." },
+                  "raisedOffline": { "type": ["integer", "null"], "description": "Amount raised offline in cents." },
+                  "currency": { "type": "string", "enum": ["USD"], "description": "Currency. Currently only USD is supported." },
+                  "imageBase64": { "type": "string", "description": "Optional base64-encoded cover image." }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+
     "/mcp": {
-      "x-zuplo-path": {
-        "pathMode": "open-api"
-      },
+      "x-zuplo-path": { "pathMode": "open-api" },
       "post": {
         "summary": "MCP Server",
         "description": "Default MCP Server",
@@ -227,32 +310,20 @@
             "options": {
               "name": "Charity Lookup MCP Server",
               "version": "1.0.0",
+              "includeStructuredContent": true,
               "operations": [
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "charity-widget"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "get-nonprofit"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "search-nonprofits"
-                },
-                {
-                  "file": "./config/routes.oas.json",
-                  "id": "browse-nonprofits-by-cause"
-                }
+                { "file": "./config/routes.oas.json", "id": "charity-widget" },
+                { "file": "./config/routes.oas.json", "id": "get-nonprofit" },
+                { "file": "./config/routes.oas.json", "id": "search-nonprofits" },
+                { "file": "./config/routes.oas.json", "id": "browse-nonprofits-by-cause" }
               ],
               "debugMode": true
             }
           },
-          "policies": {
-            "inbound": []
-          }
+          "policies": { "inbound": [] }
         }
       }
     }
+
   }
 }

@@ -1,10 +1,5 @@
 import { environment, ZuploContext, ZuploMcpSdk, ZuploRequest } from "@zuplo/runtime";
 
-/**
- * Shared utility for MCP tool handlers that need to return a widget.
- * Injects _meta.ui.resourceUri into the MCP tool response for Claude (MCP Apps standard)
- * and structuredContent for ChatGPT (OpenAI Apps SDK).
- */
 export async function mcpWidgetHandler(
   upstreamPath: string,
   queryParams: Record<string, string | undefined>,

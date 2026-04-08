@@ -11,6 +11,6 @@ export default async function (
     status: response.status,
     headers: response.headers,
   });
-  newResponse.headers.set("Content-Type", "text/html;profile=mcp-app");
+  newResponse.headers.set("Content-Type", "text/html");
   return newResponse;
 }

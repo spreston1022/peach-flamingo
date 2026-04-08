@@ -2,20 +2,13 @@ import { environment, ZuploContext, ZuploMcpSdk, ZuploRequest } from "@zuplo/run
 
 /**
  * Shared utility for MCP tool handlers that need to return a widget.
- * Handles calling an upstream API and injecting _meta.ui.resourceUri
- * into the MCP tool response for both Claude (MCP Apps standard) and
- * ChatGPT (OpenAI Apps SDK) compatibility.
- *
- * @param upstreamPath - The Every.org API path, e.g. /v0.2/search/cancer
- * @param queryParams  - Optional query params to forward (take, page, causes, etc.)
- * @param widgetUri    - The MCP resource URI of the widget to render
- * @param request      - The ZuploRequest
- * @param context      - The ZuploContext
+ * Injects _meta.ui.resourceUri into the MCP tool response for Claude (MCP Apps standard)
+ * and structuredContent for ChatGPT (OpenAI Apps SDK).
  */
 export async function mcpWidgetHandler(
   upstreamPath: string,
   queryParams: Record<string, string | undefined>,
-  widgetUri: string,
+  claudeWidgetUri: string,
   request: ZuploRequest,
   context: ZuploContext,
 ): Promise<Response> {
@@ -35,7 +28,7 @@ export async function mcpWidgetHandler(
     content: [{ type: "text", text: JSON.stringify(data) }],
     structuredContent: data,
     _meta: {
-      ui: { resourceUri: widgetUri },
+      ui: { resourceUri: claudeWidgetUri },
     },
   });
 

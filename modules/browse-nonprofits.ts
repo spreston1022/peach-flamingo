@@ -1,7 +1,7 @@
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 import { mcpWidgetHandler } from "./mcp-widget-handler";
 
-const WIDGET_URI = "ui://widget/charity.html";
+const CLAUDE_WIDGET_URI = "ui://widget/charity-claude.html";
 
 export default async function handler(
   request: ZuploRequest,
@@ -13,7 +13,7 @@ export default async function handler(
       take: request.query.take,
       page: request.query.page,
     },
-    WIDGET_URI,
+    CLAUDE_WIDGET_URI,
     request,
     context,
   );

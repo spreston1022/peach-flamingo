@@ -1,4 +1,3 @@
-
 {
   "openapi": "3.1.0",
   "info": {
@@ -7,7 +6,7 @@
   },
   "paths": {
 
-    "/widget/charity.html": {
+    "/": {
       "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Charity Lookup widget",
@@ -44,18 +43,15 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
+            "export": "default",
+            "module": "$import(./modules/get-nonprofit)"
           },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "policies": { "inbound": [] },
           "mcp": {
             "type": "tool",
             "name": "get_nonprofit",
             "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID.",
-            "annotations": {
-              "readOnlyHint": true
-            },
+            "annotations": { "readOnlyHint": true },
             "_meta": {
               "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Looking up nonprofit...",
@@ -85,18 +81,15 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
+            "export": "default",
+            "module": "$import(./modules/search-nonprofits)"
           },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "policies": { "inbound": [] },
           "mcp": {
             "type": "tool",
             "name": "search_nonprofits",
             "description": "Search nonprofits by name and render results in the Charity Lookup widget.",
-            "annotations": {
-              "readOnlyHint": true
-            },
+            "annotations": { "readOnlyHint": true },
             "_meta": {
               "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Searching nonprofits...",
@@ -140,18 +133,15 @@
         "x-zuplo-route": {
           "corsPolicy": "none",
           "handler": {
-            "export": "urlForwardHandler",
-            "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://partners.every.org" }
+            "export": "default",
+            "module": "$import(./modules/browse-nonprofits)"
           },
-          "policies": { "inbound": ["inject-every-org-api-key"] },
+          "policies": { "inbound": [] },
           "mcp": {
             "type": "tool",
             "name": "browse_nonprofits_by_cause",
             "description": "Browse nonprofits filtered by a specific cause category.",
-            "annotations": {
-              "readOnlyHint": true
-            },
+            "annotations": { "readOnlyHint": true },
             "_meta": {
               "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Browsing nonprofits...",

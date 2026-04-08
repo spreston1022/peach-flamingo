@@ -1,3 +1,4 @@
+
 {
   "openapi": "3.1.0",
   "info": {
@@ -6,7 +7,7 @@
   },
   "paths": {
 
-    "/": {
+    "/widget/charity.html": {
       "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Charity Lookup widget",
@@ -56,6 +57,7 @@
               "readOnlyHint": true
             },
             "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Looking up nonprofit...",
               "openai/toolInvocation/invoked": "Nonprofit details ready!",
               "openai/outputTemplate": "ui://widget/charity.html"
@@ -96,6 +98,7 @@
               "readOnlyHint": true
             },
             "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Searching nonprofits...",
               "openai/toolInvocation/invoked": "Results ready!",
               "openai/outputTemplate": "ui://widget/charity.html"
@@ -150,6 +153,7 @@
               "readOnlyHint": true
             },
             "_meta": {
+              "ui": { "resourceUri": "ui://widget/charity.html" },
               "openai/toolInvocation/invoking": "Browsing nonprofits...",
               "openai/toolInvocation/invoked": "Results ready!",
               "openai/outputTemplate": "ui://widget/charity.html"

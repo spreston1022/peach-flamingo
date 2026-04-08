@@ -46,7 +46,7 @@
           "handler": {
             "export": "urlForwardHandler",
             "module": "$import(@zuplo/runtime)",
-            "options": { "baseUrl": "https://project-ox76b.vercel.app" }
+            "options": { "baseUrl": "https://project-ox76b.vercel.app/charity-claude.html" }
           },
           "policies": {
             "inbound": [],
@@ -57,7 +57,7 @@
             "name": "charity_widget_claude",
             "description": "HTML widget for charity search results.",
             "uri": "ui://widget/charity-claude.html",
-            "mimeType": "text/html;profile=mcp-app"
+            "mimeType": "text/html"
           }
         }
       }
@@ -67,7 +67,7 @@
       "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Get nonprofit details",
-                    "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
+        "description": "Get details about a nonprofit by its slug, EIN, or nonprofit ID. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
         "operationId": "get-nonprofit",
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -105,7 +105,7 @@
       "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Search nonprofits",
-                    "description": "Search nonprofits by name. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
+        "description": "Search nonprofits by name. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
         "operationId": "search-nonprofits",
         "x-zuplo-route": {
           "corsPolicy": "none",
@@ -157,7 +157,7 @@
       "x-zuplo-path": { "pathMode": "open-api" },
       "get": {
         "summary": "Browse nonprofits by cause",
-                    "description": "Returns nonprofits associated with a given cause. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
+        "description": "Returns nonprofits associated with a given cause. Always display results using the interactive Charity Lookup widget — do not return plain text or markdown.",
         "operationId": "browse-nonprofits-by-cause",
         "x-zuplo-route": {
           "corsPolicy": "none",

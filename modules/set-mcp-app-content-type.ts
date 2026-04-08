@@ -1,7 +1,7 @@
 import { ZuploContext, ZuploRequest } from "@zuplo/runtime";
 
-// Outbound policy for ChatGPT widget route (/)
-// ChatGPT currently requires text/html+skybridge (older proprietary format)
+// Outbound policy for Claude widget route (/widget/claude)
+// Claude requires text/html;profile=mcp-app (MCP Apps open standard)
 export default async function (
   response: Response,
   request: ZuploRequest,
@@ -11,6 +11,6 @@ export default async function (
     status: response.status,
     headers: response.headers,
   });
-  newResponse.headers.set("Content-Type", "text/html+skybridge");
+  newResponse.headers.set("Content-Type", "text/html;profile=mcp-app");
   return newResponse;
 }

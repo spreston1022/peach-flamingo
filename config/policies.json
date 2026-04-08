@@ -8,6 +8,14 @@
         "export": "default",
         "module": "$import(./modules/set-skybridge-content-type)"
       }
+    },
+    {
+      "name": "set-mcp-app-content-type",
+      "policyType": "custom-code-outbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/set-mcp-app-content-type)"
+      }
     }
   ]
 }

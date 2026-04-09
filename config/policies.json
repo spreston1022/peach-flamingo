@@ -7,6 +7,30 @@
         "export": "default",
         "module": "$import(./modules/set-skybridge-content-type)"
       }
+    },
+    {
+      "name": "api-key",
+      "policyType": "set-query-params-inbound",
+      "handler": {
+        "export": "SetQueryParamsInboundPolicy",
+        "module": "$import(@zuplo/runtime)",
+        "options": {
+          "params": [
+            {
+              "name": "apiKey",
+              "value": "$env(EVERY_ORG_API_KEY)"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "shape-mcp-response",
+      "policyType": "custom-code-outbound",
+      "handler": {
+        "export": "default",
+        "module": "$import(./modules/shape-mcp-response)"
+      }
     }
   ]
 }

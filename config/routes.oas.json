@@ -263,6 +263,9 @@
           "policies": {
             "inbound": [
               "api-key"
+            ],
+            "outbound": [
+              "shape-mcp-response"
             ]
           }
         },
